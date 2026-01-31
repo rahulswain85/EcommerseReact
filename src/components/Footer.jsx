@@ -3,7 +3,7 @@ import React from 'react'
 function Footer() {
   return (
     <>
-      <div className="grid grid-cols-12 grid-rows-4 italic gap-1">
+      <div className="grid grid-cols-12 grid-rows-4 italic gap-1 bg-pink-50">
 
         <div className="col-span-4 row-span-3">
           <div className="flex flex-col flex-wrap justify-center items-center p-6">
@@ -32,7 +32,7 @@ function Footer() {
           </div>
         </div>
 
-        <div className='row-span-1 col-span-12 text-center italic font-bold text-sm'>Made with learnings 🧑‍💻</div>
+        <div className='row-span-1 col-span-12 text-center italic font-bold text-sm'>Made with learnings 🧑‍💻❤️</div>
       
       </div>
     </>

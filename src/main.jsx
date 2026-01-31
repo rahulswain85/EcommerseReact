@@ -8,27 +8,38 @@ import Home from './components/Home.jsx'
 import Products from './components/Products.jsx'
 import Contact from './components/Contact.jsx'
 import About from './components/About.jsx'
+import GetStarted from './components/GetStarted.jsx'
 
-const router = createBrowserRouter([{
-  path: "/",
-  element: <Layout />,
-  children: [{
+const router = createBrowserRouter([
+  {
     path: "/",
-    element: <Home/>
+    element: <Layout />,
+    children: [
+      {
+        path: "/",
+        element: <GetStarted />,
+      },
+
+      {
+        path: "/home",
+        element: <Home />,
+      },
+
+      {
+        path: "/explore",
+        element: <Products />,
+      },
+      {
+        path: "/contactus",
+        element: <Contact />,
+      },
+      {
+        path: "/aboutus",
+        element: <About />,
+      },
+    ],
   },
-    {
-      path: "/explore",
-      element: <Products />
-    },
-    {
-      path: "/contactus",
-      element: <Contact/>
-    },
-    {
-      path: "/aboutus",
-      element: <About/>
-  }]
-}])
+]);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
