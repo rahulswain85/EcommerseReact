@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider, useParams } from 'react-router-dom'
 import './index.css'
 import App from './App.jsx'
 import Layout from './components/Layout.jsx'
@@ -12,6 +12,8 @@ import GetStarted from './components/GetStarted.jsx'
 import { UserProvider } from './components/UserContext.jsx'
 import Admin from './components/Admin.jsx'
 import { ProductProvider } from './components/ProductContext.jsx'
+import ProductPage from '../ProductPage.jsx'
+
 
 const router = createBrowserRouter([
   {
@@ -24,6 +26,11 @@ const router = createBrowserRouter([
       </ProductProvider>
     ),
     children: [
+      {
+        path: "/product/:productId",
+        element: <ProductPage/>
+      },
+    
       {
         path: "/",
         element: <GetStarted />,

@@ -52,7 +52,7 @@ function Admin() {
     <>
       <div className="grid grid-cols-12 gap-1 grid-rows-6 min-h-screen">
         <div className="md:col-span-3 md:row-span-6 flex flex-col overflow-auto row-span-2 col-span-12 bg-blue-50">
-          <h1 className="text-center px-1 py-3 mt-3 text-xl font-extrabold font-mono bg-amber-200 rounded-2xl ">
+          <h1 className="text-center px-1 py-3 m-3 text-xl font-extrabold font-mono bg-amber-100 rounded-2xl ">
             {loggedinUser
               ? `Welcome, ` + loggedinUser.userName
               : `Visting as a Guest`}
