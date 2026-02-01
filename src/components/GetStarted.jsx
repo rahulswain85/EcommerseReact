@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import Login from './Login';
 import SignUp from './SignUp';
 
@@ -14,9 +14,8 @@ function GetStarted() {
         else {
             setToggleSignUpSignIn("login")
         }
-        
-        
-    }
+  }
+  
   return (
     <>
       <div className="flex w-full min-h-screen bg-amber-50">

@@ -9,15 +9,28 @@ import Products from './components/Products.jsx'
 import Contact from './components/Contact.jsx'
 import About from './components/About.jsx'
 import GetStarted from './components/GetStarted.jsx'
+import { UserProvider } from './components/UserContext.jsx'
+import Admin from './components/Admin.jsx'
+import { ProductProvider } from './components/ProductContext.jsx'
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: (
+      <ProductProvider>
+        <UserProvider>
+          <Layout />
+        </UserProvider>
+      </ProductProvider>
+    ),
     children: [
       {
         path: "/",
         element: <GetStarted />,
+      },
+      {
+        path: "/admindashboard",
+        element: <Admin />,
       },
 
       {
