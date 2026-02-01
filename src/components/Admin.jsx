@@ -7,14 +7,29 @@ import { CiEdit } from 'react-icons/ci';
 
 function Admin() {
     const addFormRef = useRef(null);
+    const updateFormRef = useRef(null);
     const { loggedinUser, users } = useUser();
     const { addProduct, products } = useProduct(); 
-
     const [productName, setProductName] = useState("");
     const [productDesc, setProductDesc] = useState("");
     const [productUrl, setProductUrl] = useState("");
     const [productCategory, setProductCategory] = useState("");
     const [productPrice, setProductPrice] = useState("");
+    const [productToUpdate, setProductToUpdate] = useState(null);
+
+    function handleEditClick(p) {
+        setProductToUpdate(p);
+        setProductName(p.productName);
+        setProductUrl(p.productUrl);
+        setProductDesc(p.productDesc);
+        setProductCategory(p.productCategory);
+        setProductPrice(p.productPrice);
+
+        updateFormRef.current?.showModal();
+    }
+
+    console.log(productToUpdate);
+    
 
     function openAddProductForm() {
         addFormRef.current?.showModal();
@@ -22,6 +37,16 @@ function Admin() {
 
     function closeAddProductForm() {
         addFormRef.current?.close();
+    }
+
+    function closeUpdateProductForm() {
+        setProductCategory("");
+        setProductDesc("");
+        setProductName("");
+        setProductUrl("");
+        setProductPrice("");
+
+        updateFormRef.current?.close();
     }
 
     function handleAddProduct(e) {
@@ -46,6 +71,10 @@ function Admin() {
 
         closeAddProductForm();
 
+    }
+
+    function handleUpdateProduct(e, id) {
+        e.preventDefault();
     }
 
   return (
@@ -114,8 +143,16 @@ function Admin() {
                     <p className="italic text-sm">{`₹ ` + p.productPrice}</p>
                   </div>
                   <div className="flex flex-row justify-evenly py-8 items-center gap-2">
-                    <CiEdit className="text-yellow-500 size-6" />
-                    <MdDelete className="text-red-600 size-6" />
+                    <button
+                      className="hover:scale-105"
+                      onClick={() => handleEditClick(p)}
+                    >
+                      <CiEdit className="text-yellow-500 size-6 hover:scale-102" />
+                    </button>
+
+                    <button>
+                      <MdDelete className="text-red-600 size-6" />
+                    </button>
                   </div>
                 </div>
               ))}
@@ -224,6 +261,86 @@ function Admin() {
                 className="bg-black text-white hover:bg-gray-500 hover:text-black font-bold px-4 py-2 rounded-full"
               >
                 Add Product
+              </button>
+            </div>
+          </div>
+        </form>
+      </dialog>
+
+      <dialog
+        ref={updateFormRef}
+        id="updateProduct"
+        className="m-auto backdrop:backdrop-blur-sm md:w-[50%] w-full rounded-2xl hidden open:flex flex-col"
+      >
+        <form
+          className="w-full flex flex-col p-2 justify-center items-center"
+          onSubmit={(e) => handleUpdateProduct(e)}
+        >
+          <h1 className="text-xl font-bold font-mono text-center">
+            Update a Product
+          </h1>
+          <div className="bg-black/20 flex flex-col justify-center gap-2 w-full rounded-xl m-2 p-6">
+            <input
+              type="text"
+              value={productToUpdate?.productName}
+              onChange={(e) => setProductName(e.target.value)}
+              placeholder="Product Name"
+              name="productName"
+              className="bg-amber-50 rounded-lg py-1 text-center focus:outline-lg focus:outline-amber-500"
+            />
+
+            <input
+              type="text"
+              value={productToUpdate?.productUrl}
+              onChange={(e) => setProductUrl(e.target.value)}
+              placeholder="Product Image URL"
+              name="productURL"
+              className="bg-amber-50 rounded-lg py-1 text-center focus:outline-lg focus:outline-amber-500"
+            />
+
+            <textarea
+              type="text"
+              value={productToUpdate?.productDesc}
+              onChange={(e) => setProductDesc(e.target.value)}
+              placeholder="Describe the product"
+              name="productDesc"
+              className="bg-amber-50 rounded-lg py-1 text-center focus:outline-lg focus:outline-amber-500"
+            />
+            <select
+              value={productToUpdate?.productCategory}
+              onChange={(e) => setProductCategory(e.target.value)}
+              className="bg-amber-50 rounded-lg py-1 text-center focus:outline-lg focus:outline-amber-500"
+            >
+              <option value="" disabled>
+                Select Category
+              </option>
+              <option value="Clothing">Clothings</option>
+              <option value="Electronics">Electronics</option>
+              <option value="Gaming">Gaming</option>
+              <option value="Books">Books</option>
+            </select>
+
+            <input
+              type="text"
+              value={productToUpdate?.productPrice}
+              onChange={(e) => setProductPrice(e.target.value)}
+              placeholder="Enter Product Prise"
+              name="productPrise"
+              className="bg-amber-50 rounded-lg py-1 text-center focus:outline-lg focus:outline-amber-500"
+            />
+            <div className="flex flex-row gap-2 justify-center items-center">
+              <button
+                type="button"
+                onClick={closeUpdateProductForm}
+                className="bg-white text-black hover:bg-gray-500 hover:text-white font-bold px-4 py-2 rounded-full"
+              >
+                Cancle
+              </button>
+              <button
+                type="submit"
+                className="bg-black text-white hover:bg-gray-500 hover:text-black font-bold px-4 py-2 rounded-full"
+              >
+                Update Product
               </button>
             </div>
           </div>
